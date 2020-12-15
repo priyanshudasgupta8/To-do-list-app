@@ -1,14 +1,19 @@
 {
   "expo": {
-    "name": "to-do-list",
-    "slug": "to-do-list",
+    "name": "book-santa",
+    "slug": "book-santa",
+    "platforms": [
+      "ios",
+      "android",
+      "web"
+    ],
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/icon.png",
+    "icon": "./assets/bookLogo.png",
     "splash": {
-      "image": "./assets/splash.png",
+      "image": "./assets/santa.png",
       "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
+      "backgroundColor": "#6fc0b8"
     },
     "updates": {
       "fallbackToCacheTimeout": 0
@@ -19,14 +24,9 @@
     "ios": {
       "supportsTablet": true
     },
-    "android": {
-      "adaptiveIcon": {
-        "foregroundImage": "./assets/adaptive-icon.png",
-        "backgroundColor": "#FFFFFF"
-      }
-    },
-    "web": {
-      "favicon": "./assets/favicon.png"
+     "android": {
+      "package": "com.bookSanta.bookSanta",
+      "versionCode": 1
     }
   }
 }
