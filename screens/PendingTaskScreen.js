@@ -79,7 +79,7 @@ export default class PendingTaskScreen extends Component {
         <View style={{ flex: 1 }}>
           {this.state.requestedBooksList.length === 0 ? (
             <View style={styles.subContainer}>
-              <Text style={{ fontSize: 20 }}>List Of All Requested Books</Text>
+              <Text style={{ fontSize: 20 }}>No Pending Tasks 🙌</Text>
             </View>
           ) : (
             <FlatList

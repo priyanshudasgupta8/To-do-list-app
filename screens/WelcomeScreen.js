@@ -169,7 +169,7 @@ export default class WelcomeScreen extends Component {
                   <Text style={styles.label}>Confirm Password</Text>
                   <TextInput
                     style={styles.formInput}
-                    placeholder={"Confirwm Password"}
+                    placeholder={"Confirm Password"}
                     secureTextEntry={true}
                     onChangeText={(text) => {
                       this.setState({

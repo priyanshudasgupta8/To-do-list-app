@@ -10,14 +10,14 @@ export const AppTabNavigator = createBottomTabNavigator({
     screen: AppStackNavigator,
     navigationOptions :{
       tabBarIcon : <Image source={require("../assets/request-list.png")} style={{width:20, height:20}}/>,
-      tabBarLabel : "Donate Books",
+      tabBarLabel : "Pending Tasks",
     }
   },
   BookRequest: {
     screen: CreateTaskScreen,
     navigationOptions :{
       tabBarIcon : <Image source={require("../assets/request-book.png")} style={{width:20, height:20}}/>,
-      tabBarLabel : "Book Request",
+      tabBarLabel : "Create Tasks",
     }
   }
 });

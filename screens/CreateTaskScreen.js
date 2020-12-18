@@ -54,7 +54,7 @@ export default class BookRequestScreen extends Component{
     .then((snapshot)=>{
       snapshot.forEach((doc)=>{
         db.collection('users').doc(doc.id).update({
-      IsBookRequestActive: true
+          IsBookRequestActive: true
       })
     })
   })
@@ -62,6 +62,7 @@ export default class BookRequestScreen extends Component{
     this.setState({
         bookName :'',
         reasonToRequest : '',
+        bookPriority : '',
         requestId: randomRequestId
     })
 
@@ -193,7 +194,7 @@ updateBookRequestStatus=()=>{
             this.updateBookRequestStatus();
             this.receivedBooks(this.state.requestedBookName)
           }}>
-          <Text>I recieved the book </Text>
+          <Text>I received the book </Text>
           </TouchableOpacity>
         </View>
       )

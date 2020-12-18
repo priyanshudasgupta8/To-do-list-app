@@ -8,7 +8,10 @@ import { AppTabNavigator } from './components/AppTabNavigator'
 
 export default function App() {
   return (
-    <AppContainer/>
+    <>
+      <AppContainer/>
+      {document.querySelector('title').innerText = 'To Do App ©'}
+    </>
   );
 }
 
