@@ -7,7 +7,8 @@ import {
   StyleSheet,
   TouchableOpacity,
   ScrollView,
-  Alert} from 'react-native';
+  Alert
+} from 'react-native';
 import db from '../config';
 import firebase from 'firebase';
 import MyHeader from '../components/MyHeader'
@@ -18,6 +19,7 @@ export default class BookRequestScreen extends Component{
     this.state ={
       userId : firebase.auth().currentUser.email,
       bookName:"",
+      bookPriority: "",
       reasonToRequest:"",
       IsBookRequestActive : "",
       requestedBookName: "",
@@ -32,18 +34,17 @@ export default class BookRequestScreen extends Component{
     return Math.random().toString(36).substring(7);
   }
 
-
-
-  addRequest = async (bookName,reasonToRequest)=>{
+  addRequest = async (bookName,reasonToRequest,priority)=>{
     var userId = this.state.userId
     var randomRequestId = this.createUniqueId()
     db.collection('requested_books').add({
         "user_id": userId,
         "book_name":bookName,
+        "book_priority":priority,
         "reason_to_request":reasonToRequest,
         "request_id"  : randomRequestId,
         "book_status" : "requested",
-         "date"       : firebase.firestore.FieldValue.serverTimestamp()
+        "date"       : firebase.firestore.FieldValue.serverTimestamp()
 
     })
 
@@ -81,9 +82,6 @@ receivedBooks=(bookName)=>{
   })
 }
 
-
-
-
 getIsBookRequestActive(){
   db.collection('users')
   .where('email_id','==',this.state.userId)
@@ -96,15 +94,6 @@ getIsBookRequestActive(){
     })
   })
 }
-
-
-
-
-
-
-
-
-
 
 getBookRequest =()=>{
   // getting the requested book
@@ -123,8 +112,6 @@ var bookRequest=  db.collection('requested_books')
       }
     })
 })}
-
-
 
 sendNotification=()=>{
   //to get the first name and last name
@@ -216,13 +203,13 @@ updateBookRequestStatus=()=>{
     return(
       // Form screen
         <View style={{flex:1}}>
-          <MyHeader title="Request Book" navigation ={this.props.navigation}/>
+          <MyHeader title="Create Task" navigation ={this.props.navigation}/>
 
           <ScrollView>
             <KeyboardAvoidingView style={styles.keyBoardStyle}>
               <TextInput
                 style ={styles.formTextInput}
-                placeholder={"enter book name"}
+                placeholder={"Task Name"}
                 onChangeText={(text)=>{
                     this.setState({
                         bookName:text
@@ -234,7 +221,7 @@ updateBookRequestStatus=()=>{
                 style ={[styles.formTextInput,{height:300}]}
                 multiline
                 numberOfLines ={8}
-                placeholder={"Why do you need the book"}
+                placeholder={"Task Description"}
                 onChangeText ={(text)=>{
                     this.setState({
                         reasonToRequest:text
@@ -242,12 +229,22 @@ updateBookRequestStatus=()=>{
                 }}
                 value ={this.state.reasonToRequest}
               />
+              <TextInput
+                style ={styles.formTextInput}
+                placeholder={"Priority"}
+                onChangeText={(text)=>{
+                    this.setState({
+                        bookPriority:text
+                    })
+                }}
+                value={this.state.bookPriority}
+              />
               <TouchableOpacity
                 style={styles.button}
-                onPress={()=>{ this.addRequest(this.state.bookName,this.state.reasonToRequest);
+                onPress={()=>{ this.addRequest(this.state.bookName, this.state.reasonToRequest, this.state.bookPriority);
                 }}
                 >
-                <Text>Request</Text>
+                <Text>Add Task</Text>
               </TouchableOpacity>
 
             </KeyboardAvoidingView>
@@ -268,7 +265,7 @@ const styles = StyleSheet.create({
     width:"75%",
     height:35,
     alignSelf:'center',
-    borderColor:'#ffab91',
+    borderColor:'#32867D',
     borderRadius:10,
     borderWidth:1,
     marginTop:20,
@@ -280,7 +277,7 @@ const styles = StyleSheet.create({
     justifyContent:'center',
     alignItems:'center',
     borderRadius:10,
-    backgroundColor:"#ff5722",
+    backgroundColor:"#6FC0B8",
     shadowColor: "#000",
     shadowOffset: {
        width: 0,

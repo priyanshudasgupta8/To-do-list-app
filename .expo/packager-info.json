@@ -1,10 +1,10 @@
 {
   "webpackServerPort": 19006,
   "expoServerPort": 19000,
-  "expoServerNgrokUrl": null,
-  "packagerNgrokUrl": null,
-  "ngrokPid": null,
+  "expoServerNgrokUrl": "https://kr-fmf.anonymous.to-do-list.exp.direct",
+  "packagerNgrokUrl": "https://packager.kr-fmf.anonymous.to-do-list.exp.direct",
+  "ngrokPid": 23204,
   "devToolsPort": 19002,
   "packagerPort": 19001,
-  "packagerPid": 31488
+  "packagerPid": 2260
 }

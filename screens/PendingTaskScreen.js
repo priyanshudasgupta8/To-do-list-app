@@ -47,19 +47,24 @@ export default class PendingTaskScreen extends Component {
     return (
       <ListItem
         key={i}
-        title={item.book_name}
+        title={`${item.book_name} --> ${item.book_priority} Priority`}
         subtitle={item.reason_to_request}
         titleStyle={{ color: "black", fontWeight: "bold" }}
         rightElement={
           <TouchableOpacity
             style={styles.button}
             onPress={() => {
-              this.props.navigation.navigate("RecieverDetails", {
-                details: item,
-              });
+              db.collection('requested_books')
+              .onSnapshot(snapshot => {
+                snapshot.forEach(doc => {
+                  if (doc.data().request_id === item.request_id) {
+                    db.collection('requested_books').doc(doc.id).delete();
+                  }
+                });
+              })
             }}
           >
-            <Text style={{ color: "#ffff" }}>View</Text>
+            <Text style={{ color: "#ffff" }}>Done</Text>
           </TouchableOpacity>
         }
         bottomDivider
@@ -70,7 +75,7 @@ export default class PendingTaskScreen extends Component {
   render() {
     return (
       <View style={styles.view}>
-        <MyHeader title="Donate Books" navigation={this.props.navigation} />
+        <MyHeader title="Pending Tasks" navigation={this.props.navigation} />
         <View style={{ flex: 1 }}>
           {this.state.requestedBooksList.length === 0 ? (
             <View style={styles.subContainer}>
